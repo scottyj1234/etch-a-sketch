@@ -1,0 +1,12 @@
+.row {
+    display: flex;
+}
+
+.square {
+    background-color: yellow;
+    border: 2px;
+    border-style: solid;
+    border-color: red;
+    width: 100px;
+    height: 100px;
+}
