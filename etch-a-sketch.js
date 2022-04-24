@@ -10,6 +10,7 @@ function drawGrid(numSquares) {
             let newSquare = document.createElement('div');
             newSquare.classList.add('square');
             newSquare.id = `square${row - 1 + col}`;
+            newSquare.style.backgroundColor = '#ffffff'
             newRow.appendChild(newSquare);
         }
         gridContainer.appendChild(newRow);
@@ -27,7 +28,12 @@ function eraseGrid() {
 }
 
 function colorSquare() {
-    this.classList.add('visited');
+    const DARKEN_FACTOR = Math.round(0.1 * 255);
+    const currentColorString = this.style.backgroundColor;
+    const currentColorLevel = Number.parseInt(currentColorString.substring(currentColorString.indexOf('(') + 1,currentColorString.indexOf(',')));
+    const newColorLevel = currentColorLevel - DARKEN_FACTOR;
+    const newColorString = newColorLevel < 0 ? 'rgb(0,0,0)' : `rgb(${newColorLevel},${newColorLevel},${newColorLevel})`;
+    this.style.backgroundColor = newColorString;
 }
 
 function changeSize() {
@@ -46,18 +52,12 @@ function changeSize() {
         if (!newGridSize) return;
     }
 
-    
-
     newGridSize = Number.parseInt(newGridSize);
-    if (newGridSize === gridSize){
-        document.querySelectorAll('.visited').forEach(
-            (square) => square.classList.remove('visited')
-        );
-    } else {
-        eraseGrid();
-        drawGrid(newGridSize);
-        gridSize = newGridSize;
-    }
+
+    eraseGrid();
+    drawGrid(newGridSize);
+    gridSize = newGridSize;
+    
 }
 
 document.querySelector('button').addEventListener('click', changeSize)

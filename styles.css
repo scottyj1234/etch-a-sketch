@@ -23,10 +23,5 @@ button {
 }
 
 .square {
-    background-color: yellow;
     flex: 1;
-}
-
-.square.visited {
-    background-color: red;
 }
