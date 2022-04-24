@@ -12,3 +12,11 @@ for (let row = 1; row <= 4; ++row){
     }
     gridContainer.appendChild(newRow);
 }
+
+function colorSquare() {
+    this.classList.add('visited');
+}
+
+document.querySelectorAll('.square').forEach(
+    (square) => square.addEventListener('mouseover', colorSquare)
+);
